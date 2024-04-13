@@ -13,6 +13,7 @@ import { UserLoader } from "./containers/UserLoader";
 import { ResourceLoader } from "./containers/ResourceLoader";
 import { DataSource } from "./containers/DataSource";
 import usersService from "./api/usersService";
+import { DataSourceWithRenderProps } from "./containers/DataSourceWithRenderProps";
 
 // const Left = ({ title }: { title: string }) => (
 //   <h2 style={{ backgroundColor: "coral" }}>{title}</h2>
@@ -85,11 +86,16 @@ function App() {
     //   </ResourceLoader>
     // </>
 
-    <>
-      <DataSource getData={() => usersService.getUser(1)} resourceName="user">
-        <UserInfo />
-      </DataSource>
-    </>
+    // <>
+    //   <DataSource getData={() => usersService.getUser(1)} resourceName="user">
+    //     <UserInfo />
+    //   </DataSource>
+    // </>
+
+    <DataSourceWithRenderProps
+      getData={() => usersService.getUser(1)}
+      render={(resource) => <UserInfo user={resource} />}
+    />
   );
 }
 
