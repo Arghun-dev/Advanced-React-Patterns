@@ -16,6 +16,8 @@ import usersService from "./api/usersService";
 import { DataSourceWithRenderProps } from "./containers/DataSourceWithRenderProps";
 import { getDataFromLocalStorage } from "./utils/localStorage";
 import { Message } from "./components/Message";
+import { UnControlledForm } from "./components/UnControlledForm";
+import { UnControlledFlow } from "./components/UnControlledFlow";
 
 // const Left = ({ title }: { title: string }) => (
 //   <h2 style={{ backgroundColor: "coral" }}>{title}</h2>
@@ -24,6 +26,36 @@ import { Message } from "./components/Message";
 // const Right = ({ title }: { title: string }) => (
 //   <h2 style={{ backgroundColor: "crimson" }}>{title}</h2>
 // );
+
+const StepOne = ({ goNext }) => {
+  return (
+    <div>
+      <h1>Step One</h1>
+      <p>Enter your name:</p>
+      <button onClick={() => goNext({ name: "Arghun" })}>Next</button>
+    </div>
+  );
+};
+
+const StepTwo = ({ goNext }) => {
+  return (
+    <div>
+      <h1>Step Two</h1>
+      <p>Enter your age</p>
+      <button onClick={() => goNext({ age: 29 })}>Next</button>
+    </div>
+  );
+};
+
+const StepThree = ({ goNext }) => {
+  return (
+    <div>
+      <h1>Step Three</h1>
+      <p>Enter your country</p>
+      <button onClick={() => goNext({ country: "Sweden" })}>Next</button>
+    </div>
+  );
+};
 
 function App() {
   return (
@@ -94,16 +126,40 @@ function App() {
     //   </DataSource>
     // </>
 
-    <>
-      <DataSourceWithRenderProps
-        getData={() => usersService.getUser(1)}
-        render={(resource) => <UserInfo user={resource} />}
-      />
+    /** --------------------  DataSource With RenderProps -------------------------- */
 
-      <DataSourceWithRenderProps
-        getData={() => getDataFromLocalStorage("test")}
-        render={(resource) => <Message message={resource} />}
-      />
+    // <>
+    //   <DataSourceWithRenderProps
+    //     getData={() => usersService.getUser(1)}
+    //     render={(resource) => <UserInfo user={resource} />}
+    //   />
+
+    //   <DataSourceWithRenderProps
+    //     getData={() => getDataFromLocalStorage("test")}
+    //     render={(resource) => <Message message={resource} />}
+    //   />
+    // </>
+
+    /** --------------------  UnControlled Component -------------------------- */
+
+    // <UnControlledForm />
+
+    /** --------------------  Controlled Component -------------------------- */
+
+    // It's just simply a form with defined states for each input field - with controlled forms you can check and validate the form and show error messages in case of validation failure.
+
+    /** -------------------- UnControlled Flow -------------------------- */
+    <>
+      <UnControlledFlow
+        onDone={(data) => {
+          console.log(data);
+          alert("Done!" + JSON.stringify(data));
+        }}
+      >
+        <StepOne />
+        <StepTwo />
+        <StepThree />
+      </UnControlledFlow>
     </>
   );
 }
