@@ -18,7 +18,9 @@ import { getDataFromLocalStorage } from "./utils/localStorage";
 import { Message } from "./components/Message";
 import { UnControlledForm } from "./components/UnControlledForm";
 import { ControlledFlow } from "./components/ControlledFlow";
+import { logProps } from "./components/HOC/logProps";
 import { useState } from "react";
+import { includeUser } from "./components/HOC/includeUser";
 
 // const Left = ({ title }: { title: string }) => (
 //   <h2 style={{ backgroundColor: "coral" }}>{title}</h2>
@@ -28,44 +30,47 @@ import { useState } from "react";
 //   <h2 style={{ backgroundColor: "crimson" }}>{title}</h2>
 // );
 
-const StepOne = ({ goNext }) => {
-  return (
-    <div>
-      <h1>Step One</h1>
-      <p>Enter your name:</p>
-      <button onClick={() => goNext({ name: "Arghun" })}>Next</button>
-    </div>
-  );
-};
+// const StepOne = ({ goNext }) => {
+//   return (
+//     <div>
+//       <h1>Step One</h1>
+//       <p>Enter your name:</p>
+//       <button onClick={() => goNext({ name: "Arghun" })}>Next</button>
+//     </div>
+//   );
+// };
 
-const StepTwo = ({ goNext }) => {
-  return (
-    <div>
-      <h1>Step Two</h1>
-      <p>Enter your age</p>
-      <button onClick={() => goNext({ age: 29 })}>Next</button>
-    </div>
-  );
-};
+// const StepTwo = ({ goNext }) => {
+//   return (
+//     <div>
+//       <h1>Step Two</h1>
+//       <p>Enter your age</p>
+//       <button onClick={() => goNext({ age: 29 })}>Next</button>
+//     </div>
+//   );
+// };
 
-const StepThree = ({ goNext }) => {
-  return (
-    <div>
-      <h1>Step Three</h1>
-      <p>Enter your country</p>
-      <button onClick={() => goNext({ country: "Sweden" })}>Next</button>
-    </div>
-  );
-};
+// const StepThree = ({ goNext }) => {
+//   return (
+//     <div>
+//       <h1>Step Three</h1>
+//       <p>Enter your country</p>
+//       <button onClick={() => goNext({ country: "Sweden" })}>Next</button>
+//     </div>
+//   );
+// };
+
+const UserInfoWithLogs = logProps(UserInfo);
+const UserInfoWithLoader = includeUser(UserInfo, "2");
 
 function App() {
-  const [data, setData] = useState({});
-  const [currentStepIndex, setCurrentStepIndex] = useState(0);
+  // const [data, setData] = useState({});
+  // const [currentStepIndex, setCurrentStepIndex] = useState(0);
 
-  const goNext = (dataFromStep) => {
-    setData({ ...data, ...dataFromStep });
-    setCurrentStepIndex(currentStepIndex + 1);
-  };
+  // const goNext = (dataFromStep) => {
+  //   setData({ ...data, ...dataFromStep });
+  //   setCurrentStepIndex(currentStepIndex + 1);
+  // };
 
   return (
     // <SplitScreen leftWidth={1} rightWidth={3}>
@@ -158,12 +163,17 @@ function App() {
     // It's just simply a form with defined states for each input field - with controlled forms you can check and validate the form and show error messages in case of validation failure.
 
     /** -------------------- Controlled Flow -------------------------- */
+    // <>
+    //   <ControlledFlow currentIndex={currentStepIndex} onNext={goNext}>
+    //     <StepOne />
+    //     <StepTwo />
+    //     {data.age < 28 ? <StepThree /> : null}
+    //   </ControlledFlow>
+    // </>
+
     <>
-      <ControlledFlow currentIndex={currentStepIndex} onNext={goNext}>
-        <StepOne />
-        <StepTwo />
-        {data.age < 28 ? <StepThree /> : null}
-      </ControlledFlow>
+      <UserInfoWithLogs test="Test prop" a="This is A" b={22} />
+      <UserInfoWithLoader />
     </>
   );
 }
