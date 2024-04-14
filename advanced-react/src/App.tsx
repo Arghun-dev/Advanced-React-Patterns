@@ -17,7 +17,8 @@ import { DataSourceWithRenderProps } from "./containers/DataSourceWithRenderProp
 import { getDataFromLocalStorage } from "./utils/localStorage";
 import { Message } from "./components/Message";
 import { UnControlledForm } from "./components/UnControlledForm";
-import { UnControlledFlow } from "./components/UnControlledFlow";
+import { ControlledFlow } from "./components/ControlledFlow";
+import { useState } from "react";
 
 // const Left = ({ title }: { title: string }) => (
 //   <h2 style={{ backgroundColor: "coral" }}>{title}</h2>
@@ -58,6 +59,14 @@ const StepThree = ({ goNext }) => {
 };
 
 function App() {
+  const [data, setData] = useState({});
+  const [currentStepIndex, setCurrentStepIndex] = useState(0);
+
+  const goNext = (dataFromStep) => {
+    setData({ ...data, ...dataFromStep });
+    setCurrentStepIndex(currentStepIndex + 1);
+  };
+
   return (
     // <SplitScreen leftWidth={1} rightWidth={3}>
     //   <Left title="I am Left!" />
@@ -148,18 +157,13 @@ function App() {
 
     // It's just simply a form with defined states for each input field - with controlled forms you can check and validate the form and show error messages in case of validation failure.
 
-    /** -------------------- UnControlled Flow -------------------------- */
+    /** -------------------- Controlled Flow -------------------------- */
     <>
-      <UnControlledFlow
-        onDone={(data) => {
-          console.log(data);
-          alert("Done!" + JSON.stringify(data));
-        }}
-      >
+      <ControlledFlow currentIndex={currentStepIndex} onNext={goNext}>
         <StepOne />
         <StepTwo />
-        <StepThree />
-      </UnControlledFlow>
+        {data.age < 28 ? <StepThree /> : null}
+      </ControlledFlow>
     </>
   );
 }
