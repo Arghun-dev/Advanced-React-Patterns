@@ -21,6 +21,7 @@ import { ControlledFlow } from "./components/ControlledFlow";
 import { logProps } from "./components/HOC/logProps";
 import { useState } from "react";
 import { includeUser } from "./components/HOC/includeUser";
+import { UserForm } from "./components/UserForm";
 
 // const Left = ({ title }: { title: string }) => (
 //   <h2 style={{ backgroundColor: "coral" }}>{title}</h2>
@@ -171,10 +172,14 @@ function App() {
     //   </ControlledFlow>
     // </>
 
-    <>
-      <UserInfoWithLogs test="Test prop" a="This is A" b={22} />
-      <UserInfoWithLoader />
-    </>
+    /** -------------------- HOC Data logging and Data Fetching -------------------------- */
+    // <>
+    //   <UserInfoWithLogs test="Test prop" a="This is A" b={22} />
+    //   <UserInfoWithLoader />
+    // </>
+
+    /** -------------------- HOC Data Fetching and updating -------------------------- */
+    <UserForm />
   );
 }
 
