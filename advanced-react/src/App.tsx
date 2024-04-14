@@ -22,6 +22,7 @@ import { logProps } from "./components/HOC/logProps";
 import { useState } from "react";
 import { includeUser } from "./components/HOC/includeUser";
 import { UserForm } from "./components/UserForm";
+import { UserInfoWithHook } from "./components/UserInfoWithHook";
 
 // const Left = ({ title }: { title: string }) => (
 //   <h2 style={{ backgroundColor: "coral" }}>{title}</h2>
@@ -179,7 +180,10 @@ function App() {
     // </>
 
     /** -------------------- HOC Data Fetching and updating -------------------------- */
-    <UserForm />
+    // <UserForm />
+
+    /** -------------------- Data Fetching with hook -------------------------- */
+    <UserInfoWithHook userId={3} />
   );
 }
 
