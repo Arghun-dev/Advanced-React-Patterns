@@ -14,6 +14,8 @@ import { ResourceLoader } from "./containers/ResourceLoader";
 import { DataSource } from "./containers/DataSource";
 import usersService from "./api/usersService";
 import { DataSourceWithRenderProps } from "./containers/DataSourceWithRenderProps";
+import { getDataFromLocalStorage } from "./utils/localStorage";
+import { Message } from "./components/Message";
 
 // const Left = ({ title }: { title: string }) => (
 //   <h2 style={{ backgroundColor: "coral" }}>{title}</h2>
@@ -92,10 +94,17 @@ function App() {
     //   </DataSource>
     // </>
 
-    <DataSourceWithRenderProps
-      getData={() => usersService.getUser(1)}
-      render={(resource) => <UserInfo user={resource} />}
-    />
+    <>
+      <DataSourceWithRenderProps
+        getData={() => usersService.getUser(1)}
+        render={(resource) => <UserInfo user={resource} />}
+      />
+
+      <DataSourceWithRenderProps
+        getData={() => getDataFromLocalStorage("test")}
+        render={(resource) => <Message message={resource} />}
+      />
+    </>
   );
 }
 
