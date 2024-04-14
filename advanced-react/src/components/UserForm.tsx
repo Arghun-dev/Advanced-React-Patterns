@@ -1,6 +1,6 @@
-import { includeUpdatableUser } from "./HOC/includeUpdatableUser";
+import { includeUpdatableResource } from "./HOC/includeUpdatableResource";
 
-export const UserForm = includeUpdatableUser(
+export const UserForm = includeUpdatableResource(
   ({ user, onChangeUser, onPostUser, onResetUser }) => {
     const { name, age } = user || {};
 
@@ -31,5 +31,6 @@ export const UserForm = includeUpdatableUser(
       <h3>Loading</h3>
     );
   },
-  "2"
+  "https://jsonplaceholder.typicode.com/users/3",
+  "user"
 );
