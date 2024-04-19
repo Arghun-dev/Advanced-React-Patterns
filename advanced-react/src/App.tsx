@@ -23,6 +23,7 @@ import { useState } from "react";
 import { includeUser } from "./components/HOC/includeUser";
 import { UserForm } from "./components/UserForm";
 import { UserInfoWithHook } from "./components/UserInfoWithHook";
+import { RecursiveComponent } from "./components/RecursiveComponent";
 
 // const Left = ({ title }: { title: string }) => (
 //   <h2 style={{ backgroundColor: "coral" }}>{title}</h2>
@@ -62,8 +63,20 @@ import { UserInfoWithHook } from "./components/UserInfoWithHook";
 //   );
 // };
 
-const UserInfoWithLogs = logProps(UserInfo);
-const UserInfoWithLoader = includeUser(UserInfo, "2");
+// const UserInfoWithLogs = logProps(UserInfo);
+// const UserInfoWithLoader = includeUser(UserInfo, "2");
+
+const myNestedObject = {
+  key1: "value1",
+  key2: {
+    innerKey1: "innerValue1",
+    innerKey2: {
+      innerInnerKey1: "innerInnerValue1",
+      innerInnerKey2: "innerInnerValue2",
+    },
+  },
+  key3: "value3",
+};
 
 function App() {
   // const [data, setData] = useState({});
@@ -183,7 +196,10 @@ function App() {
     // <UserForm />
 
     /** -------------------- Data Fetching with hook -------------------------- */
-    <UserInfoWithHook userId={3} />
+    // <UserInfoWithHook userId={3} />
+
+    /** -------------------- Recursive Component -------------------------- */
+    <RecursiveComponent data={myNestedObject} />
   );
 }
 
