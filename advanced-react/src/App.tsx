@@ -24,6 +24,7 @@ import { includeUser } from "./components/HOC/includeUser";
 import { UserForm } from "./components/UserForm";
 import { UserInfoWithHook } from "./components/UserInfoWithHook";
 import { RecursiveComponent } from "./components/RecursiveComponent";
+import { RedButton, SmallRedButton } from "./components/Composition";
 
 // const Left = ({ title }: { title: string }) => (
 //   <h2 style={{ backgroundColor: "coral" }}>{title}</h2>
@@ -199,7 +200,13 @@ function App() {
     // <UserInfoWithHook userId={3} />
 
     /** -------------------- Recursive Component -------------------------- */
-    <RecursiveComponent data={myNestedObject} />
+    // <RecursiveComponent data={myNestedObject} />
+
+    /** -------------------- Composition & Partial component pattern -------------------------- */
+    <>
+      <RedButton text="Big Red Btn" />
+      <SmallRedButton text="Small Red Btn" />
+    </>
   );
 }
 

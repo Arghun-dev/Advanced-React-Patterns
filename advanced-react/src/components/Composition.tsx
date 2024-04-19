@@ -1,3 +1,8 @@
+// Let's see how partialComopnent can actually help to improve composition pattern.
+export const partialComopnent = (Component, partialProps) => {
+  return (props) => <Component {...partialProps} {...props} />;
+};
+
 export const Button = ({ size, color, text, ...props }) => {
   return (
     <button
@@ -16,13 +21,13 @@ export const Button = ({ size, color, text, ...props }) => {
   );
 };
 
-export const RedButton = (props) => {
-  return <Button color="red" {...props} />;
-};
+// export const RedButton = (props) => {
+//   return <Button color="red" {...props} />;
+// };
 
-export const SmallGreenButton = (props) => {
-  return <Button size="small" color="green" {...props} />;
-};
+// export const SmallGreenButton = (props) => {
+//   return <Button size="small" color="green" {...props} />;
+// };
 
 // How to use it
 
@@ -34,3 +39,8 @@ export const SmallGreenButton = (props) => {
 //       <Button text="Click me" />
 //       <RedButton text="Click me" />
 //       <SmallGreenButton text="Click me" />
+
+/** partialComopnent pattern actually improves composionComponent pattern and we can use them together */
+
+export const RedButton = partialComopnent(Button, { color: "red" });
+export const SmallRedButton = partialComopnent(RedButton, { size: "small" });
