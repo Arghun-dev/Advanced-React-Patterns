@@ -22,9 +22,9 @@ const Footer = ({ children }) => {
   return <div style={{ backgroundColor: "lightcoral" }}>{children}</div>;
 };
 
-const Card = ({ children }) => {
+const Card = ({ children, name }) => {
   return (
-    <CardProvider value={{ name: "arghun" }}>
+    <CardProvider value={{ name }}>
       <div style={{ border: "1px solid black" }}>{children}</div>
     </CardProvider>
   );

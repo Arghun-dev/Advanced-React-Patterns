@@ -214,7 +214,7 @@ function App() {
     // In the example below, we have a Card component that has three parts: Header, Body, and Footer. You can use these parts independently or together to create a Card component.
     // If we didn't use the compound component pattern, we would have to pass all the parts of the card as props to the Card component. This would make the Card component less flexible and harder to use.
     <>
-      <Card>
+      <Card name="arghun">
         <Card.Header>Header</Card.Header>
         <Card.Body>Body</Card.Body>
         <Card.Footer>Footer</Card.Footer>
