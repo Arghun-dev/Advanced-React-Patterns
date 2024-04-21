@@ -26,6 +26,7 @@ import { UserInfoWithHook } from "./components/UserInfoWithHook";
 import { RecursiveComponent } from "./components/RecursiveComponent";
 import { RedButton, SmallRedButton } from "./components/Composition";
 import Card from "./components/CompoundComponents";
+import ParentComponent from "./components/ObserverPattern";
 
 // const Left = ({ title }: { title: string }) => (
 //   <h2 style={{ backgroundColor: "coral" }}>{title}</h2>
@@ -213,13 +214,19 @@ function App() {
     // As you can see this is very clean approach to create a compound component. You can use this pattern to create a complex component that has multiple parts and each part can be used independently.
     // In the example below, we have a Card component that has three parts: Header, Body, and Footer. You can use these parts independently or together to create a Card component.
     // If we didn't use the compound component pattern, we would have to pass all the parts of the card as props to the Card component. This would make the Card component less flexible and harder to use.
-    <>
-      <Card name="arghun">
-        <Card.Header>Header</Card.Header>
-        <Card.Body>Body</Card.Body>
-        <Card.Footer>Footer</Card.Footer>
-      </Card>
-    </>
+    // <>
+    //   <Card name="arghun">
+    //     <Card.Header>Header</Card.Header>
+    //     <Card.Body>Body</Card.Body>
+    //     <Card.Footer>Footer</Card.Footer>
+    //   </Card>
+    // </>
+
+    //** -------------------- Observer Pattern -------------------------- */
+    // We have used Observer pattern which we have attached listeners to Buttons component buttons and when the buttons are clicked, the listeners are triggered and the Counter component is updated.
+    // So, the Counter component is observing the Buttons component and when the buttons are clicked, the Counter component is updated.
+    // So, we don't have to pass state to ParentComponent and then pass it to the children components. We can use Observer pattern to update the components when the state changes.
+    <ParentComponent />
   );
 }
 
