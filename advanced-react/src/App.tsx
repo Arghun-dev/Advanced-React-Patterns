@@ -27,6 +27,7 @@ import { RecursiveComponent } from "./components/RecursiveComponent";
 import { RedButton, SmallRedButton } from "./components/Composition";
 import Card from "./components/CompoundComponents";
 import ParentComponent from "./components/ObserverPattern";
+import { ReactPortal } from "./components/ReactPortal";
 
 // const Left = ({ title }: { title: string }) => (
 //   <h2 style={{ backgroundColor: "coral" }}>{title}</h2>
@@ -226,7 +227,12 @@ function App() {
     // We have used Observer pattern which we have attached listeners to Buttons component buttons and when the buttons are clicked, the listeners are triggered and the Counter component is updated.
     // So, the Counter component is observing the Buttons component and when the buttons are clicked, the Counter component is updated.
     // So, we don't have to pass state to ParentComponent and then pass it to the children components. We can use Observer pattern to update the components when the state changes.
-    <ParentComponent />
+    // <ParentComponent />
+
+    /** -------------------- React Portal -------------------------- */
+    <div style={{ marginTop: "20%", marginLeft: "20%" }}>
+      <ReactPortal />
+    </div>
   );
 }
 
