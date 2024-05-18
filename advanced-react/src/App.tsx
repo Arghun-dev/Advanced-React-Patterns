@@ -31,6 +31,10 @@ import { ForwardRef } from "./components/ForwardRef";
 import { ReactPortal } from "./components/ReactPortal";
 import { ErrorBoundaryExample } from "./components/ErrorBoundary";
 import { Keys } from "./components/Keys";
+import {
+  EventListeners,
+  EventListenersTopToBottom,
+} from "./components/EventListeners";
 
 // const Left = ({ title }: { title: string }) => (
 //   <h2 style={{ backgroundColor: "coral" }}>{title}</h2>
@@ -244,7 +248,11 @@ function App() {
     // <ErrorBoundaryExample />
 
     /** -------------------- Keys ----------------------- */
-    <Keys />
+    // <Keys />
+
+    /** -------------------- Event Listeners ---------------------- */
+    // <EventListeners />
+    <EventListenersTopToBottom />
   );
 }
 
