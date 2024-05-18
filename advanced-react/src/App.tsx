@@ -29,6 +29,7 @@ import Card from "./components/CompoundComponents";
 import ParentComponent from "./components/ObserverPattern";
 import { ForwardRef } from "./components/ForwardRef";
 import { ReactPortal } from "./components/ReactPortal";
+import { ErrorBoundaryExample } from "./components/ErrorBoundary";
 
 // const Left = ({ title }: { title: string }) => (
 //   <h2 style={{ backgroundColor: "coral" }}>{title}</h2>
@@ -236,7 +237,10 @@ function App() {
     // </div>
 
     /** -------------------- Forward Ref -------------------------- */
-    <ForwardRef />
+    // <ForwardRef />
+
+    /** -------------------- ErrorBoundaryExample ----------------------- */
+    <ErrorBoundaryExample />
   );
 }
 
