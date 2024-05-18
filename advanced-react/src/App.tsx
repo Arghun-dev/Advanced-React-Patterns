@@ -27,6 +27,7 @@ import { RecursiveComponent } from "./components/RecursiveComponent";
 import { RedButton, SmallRedButton } from "./components/Composition";
 import Card from "./components/CompoundComponents";
 import ParentComponent from "./components/ObserverPattern";
+import { ForwardRef } from "./components/ForwardRef";
 import { ReactPortal } from "./components/ReactPortal";
 
 // const Left = ({ title }: { title: string }) => (
@@ -230,9 +231,12 @@ function App() {
     // <ParentComponent />
 
     /** -------------------- React Portal -------------------------- */
-    <div style={{ marginTop: "20%", marginLeft: "20%" }}>
-      <ReactPortal />
-    </div>
+    // <div style={{ marginTop: "20%", marginLeft: "20%" }}>
+    //   <ReactPortal />
+    // </div>
+
+    /** -------------------- Forward Ref -------------------------- */
+    <ForwardRef />
   );
 }
 
