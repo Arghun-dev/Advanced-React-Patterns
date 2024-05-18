@@ -35,6 +35,7 @@ import {
   EventListeners,
   EventListenersTopToBottom,
 } from "./components/EventListeners";
+import { UseLayoutEffect } from "./components/UseLayoutEffect";
 
 // const Left = ({ title }: { title: string }) => (
 //   <h2 style={{ backgroundColor: "coral" }}>{title}</h2>
@@ -252,7 +253,10 @@ function App() {
 
     /** -------------------- Event Listeners ---------------------- */
     // <EventListeners />
-    <EventListenersTopToBottom />
+    // <EventListenersTopToBottom />
+
+    /** -------------------- UseLayoutEffect ------------------------- */
+    <UseLayoutEffect />
   );
 }
 
