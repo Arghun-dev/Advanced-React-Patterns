@@ -37,6 +37,7 @@ import {
 } from "./components/EventListeners";
 import { UseLayoutEffect } from "./components/UseLayoutEffect";
 import { UseId } from "./components/UseId";
+import { UseCallbackRef } from "./components/UseCallbackRef";
 
 // const Left = ({ title }: { title: string }) => (
 //   <h2 style={{ backgroundColor: "coral" }}>{title}</h2>
@@ -260,7 +261,10 @@ function App() {
     // <UseLayoutEffect />
 
     /** -------------------- UseId ----------------------------- */
-    <UseId />
+    // <UseId />
+
+    /** -------------------- UseCallbackRef ------------------------ */
+    <UseCallbackRef />
   );
 }
 
