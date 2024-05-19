@@ -1,13 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
-import { ErrorBoundary } from "./components/ErrorBoundary.tsx";
 import "./index.css";
+import { CartProvider } from "./components/Context.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <ErrorBoundary fallback={<h1>Something went wrong</h1>}>
+    <CartProvider>
       <App />
-    </ErrorBoundary>
+    </CartProvider>
   </React.StrictMode>
 );
