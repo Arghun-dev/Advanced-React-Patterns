@@ -38,6 +38,7 @@ import {
 import { UseLayoutEffect } from "./components/UseLayoutEffect";
 import { UseId } from "./components/UseId";
 import { UseCallbackRef } from "./components/UseCallbackRef";
+import { UseImperativeHandle } from "./components/UseImperativeHandle";
 
 // const Left = ({ title }: { title: string }) => (
 //   <h2 style={{ backgroundColor: "coral" }}>{title}</h2>
@@ -264,7 +265,10 @@ function App() {
     // <UseId />
 
     /** -------------------- UseCallbackRef ------------------------ */
-    <UseCallbackRef />
+    // <UseCallbackRef />
+
+    /** -------------------- useImperativeHandle ------------------------ */
+    <UseImperativeHandle />
   );
 }
 
