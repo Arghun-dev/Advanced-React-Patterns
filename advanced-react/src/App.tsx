@@ -40,6 +40,7 @@ import { UseId } from "./components/UseId";
 import { UseCallbackRef } from "./components/UseCallbackRef";
 import { UseImperativeHandle } from "./components/UseImperativeHandle";
 import { UseDeferredValue } from "./components/UseDeferredValue";
+import { Button } from "./components/ElementProp";
 
 // const Left = ({ title }: { title: string }) => (
 //   <h2 style={{ backgroundColor: "coral" }}>{title}</h2>
@@ -272,7 +273,13 @@ function App() {
     // <UseImperativeHandle />
 
     /** -------------------- UseDeferredValue ------------------------ */
-    <UseDeferredValue />
+    // <UseDeferredValue />
+
+    /** -------------------- ElementProp ---------------------------- */
+    <>
+      <Button size="s" text="Hello" />
+      <Button size="l" text="Hello" As="a" href="www.google.com" />
+    </>
   );
 }
 
