@@ -81,3 +81,4 @@ updateProduct((draft) => {
 `Throttle`: Ensures that a function is called at most once in a specified period.
 `Debounce`: Ensures that a function is called only after a specified period of inactivity.
 
+---
