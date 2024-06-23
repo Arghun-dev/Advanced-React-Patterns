@@ -69,3 +69,15 @@ updateProduct((draft) => {
 ```
 
 ---
+
+
+# Throttle vs Debounce
+
+`Throttle` is a technique used to limit the frequency of a function execution. When a function is throttled, it is only allowed to run once in a specified period of time, regardless of how many times it is called. This is particularly useful for performance optimization when dealing with events that can fire very frequently, such as scrolling, resizing, or input events.
+
+
+### Throttle vs. Debounce**
+
+`Throttle`: Ensures that a function is called at most once in a specified period.
+`Debounce`: Ensures that a function is called only after a specified period of inactivity.
+
