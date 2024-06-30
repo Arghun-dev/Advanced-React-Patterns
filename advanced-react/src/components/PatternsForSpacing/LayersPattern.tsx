@@ -1,18 +1,11 @@
 import { styled } from "styled-components";
-
-const spaceSchema = {
-  xs: "0.25rem",
-  sm: "0.5rem",
-  md: "1rem",
-  lg: "2rem",
-  xl: "4rem",
-};
+import { spaceSchema } from "../../utils/spaceSchema";
 
 interface LayerProps {
   gutter?: keyof typeof spaceSchema;
 }
 
-const Layer = styled.div<LayerProps>`
+export const Layer = styled.div<LayerProps>`
   display: grid;
   gap: ${(props) => spaceSchema[props.gutter ?? "md"]};
 `;

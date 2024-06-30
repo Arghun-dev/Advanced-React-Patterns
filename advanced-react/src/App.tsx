@@ -42,6 +42,7 @@ import { UseImperativeHandle } from "./components/UseImperativeHandle";
 import { UseDeferredValue } from "./components/UseDeferredValue";
 import { Button } from "./components/ElementProp";
 import { LayersPattern } from "./components/PatternsForSpacing/LayersPattern";
+import { SplitScreen } from "./components/PatternsForSpacing/SplitScreen";
 
 // const Left = ({ title }: { title: string }) => (
 //   <h2 style={{ backgroundColor: "coral" }}>{title}</h2>
@@ -283,7 +284,10 @@ function App() {
     // </>
 
     /** -------------------- LayersPattern --------------------------- */
-    <LayersPattern />
+    // <LayersPattern />
+
+    /** -------------------- SplitScreen Pattern --------------------- */
+    <SplitScreen />
   );
 }
 
