@@ -43,6 +43,7 @@ import { UseDeferredValue } from "./components/UseDeferredValue";
 import { Button } from "./components/ElementProp";
 import { LayersPattern } from "./components/PatternsForSpacing/LayersPattern";
 import { SplitScreen } from "./components/PatternsForSpacing/SplitScreen";
+import { ColumnsPattern } from "./components/PatternsForSpacing/ColumnsPattern";
 
 // const Left = ({ title }: { title: string }) => (
 //   <h2 style={{ backgroundColor: "coral" }}>{title}</h2>
@@ -287,7 +288,10 @@ function App() {
     // <LayersPattern />
 
     /** -------------------- SplitScreen Pattern --------------------- */
-    <SplitScreen />
+    // <SplitScreen />
+
+    /** -------------------- Columns Pattern ------------------------- */
+    <ColumnsPattern />
   );
 }
 
