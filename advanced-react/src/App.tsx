@@ -41,6 +41,7 @@ import { UseCallbackRef } from "./components/UseCallbackRef";
 import { UseImperativeHandle } from "./components/UseImperativeHandle";
 import { UseDeferredValue } from "./components/UseDeferredValue";
 import { Button } from "./components/ElementProp";
+import { LayersPattern } from "./components/PatternsForSpacing/LayersPattern";
 
 // const Left = ({ title }: { title: string }) => (
 //   <h2 style={{ backgroundColor: "coral" }}>{title}</h2>
@@ -276,10 +277,13 @@ function App() {
     // <UseDeferredValue />
 
     /** -------------------- ElementProp ---------------------------- */
-    <>
-      <Button size="s" text="Hello" />
-      <Button size="l" text="Hello" As="a" href="www.google.com" />
-    </>
+    // <>
+    //   <Button size="s" text="Hello" />
+    //   <Button size="l" text="Hello" As="a" href="www.google.com" />
+    // </>
+
+    /** -------------------- LayersPattern --------------------------- */
+    <LayersPattern />
   );
 }
 
