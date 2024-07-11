@@ -103,3 +103,32 @@ const App = () => {
 ### Why I used `as const`?
 
 Because, inside the hook we're returning an array right? `[url, setUrl]` So, TypeScript thinks that this array is going to be updated, perhaps you want to push some new elements to it or change it and stuff like that, But in fact, we want to return a `Tuple` not an array. So, with using `as const` we're making it readonly and convert it to Tuple. When you say `as const` you're telling the TypeScript that this `[url, setUrl]` is NOT going to be updated it's just going to have all these two members -> Now we will have correct and string types for each `url` and `setUrl`.
+
+
+---
+
+
+# More complex types
+
+Imagina we have 3 states for status `fetching`, `fetched`, `error` we want to fetch some data and if fetching was seccussful we want to have data and if not we want to setState error.
+
+```js
+type State = 
+ | {
+     status: "fetching"   
+   }
+ | {
+    status: "fetched",
+    data: Book[]
+   }
+  |{
+    status: "error",
+    error: Error
+   }
+
+const App = () => {
+  const [state, setState] = useState<State>({ status: "fetching" });
+
+  ...rest of the fetching code
+}
+```
