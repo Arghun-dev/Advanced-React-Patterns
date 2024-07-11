@@ -132,3 +132,29 @@ const App = () => {
   ...rest of the fetching code
 }
 ```
+
+---
+
+
+# Tuples with Custom Hooks
+
+useFetch.ts
+```js
+type Data<T> =
+ | ["fetching", undefined?]
+ | ["success", T]
+ | ["error", Error]; 
+
+export const useFetch = <T,>(url: string): Data<T> => {
+  const [data, setData] = useState<Data<T>>(["fetching"]);
+
+  useEffect(() => {
+    fetch(url)
+      .then((res) => res.json())
+      .then((d) => setData(["success", d]))
+      .catch((error) => setData(["error", error]))
+  }, [])
+
+  return data;
+} 
+```
