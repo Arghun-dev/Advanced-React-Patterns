@@ -158,3 +158,13 @@ export const useFetch = <T,>(url: string): Data<T> => {
   return data;
 } 
 ```
+
+---
+
+
+# Template Literal Types
+
+```js
+type HexColor = `#${string}`;
+type RGBColor = `rgb(${number}, ${number}, ${number})`;
+```
