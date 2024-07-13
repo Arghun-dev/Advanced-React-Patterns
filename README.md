@@ -167,4 +167,7 @@ export const useFetch = <T,>(url: string): Data<T> => {
 ```js
 type HexColor = `#${string}`;
 type RGBColor = `rgb(${number}, ${number}, ${number})`;
+
+type ColorFormats = 'hex' | 'rgb';
+type ActionTypes = `update-${ColorFormats}`; // ActionTypes: 'update-hex' | 'update-rgb'
 ```
