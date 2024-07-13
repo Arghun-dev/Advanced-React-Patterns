@@ -170,4 +170,8 @@ type RGBColor = `rgb(${number}, ${number}, ${number})`;
 
 type ColorFormats = 'hex' | 'rgb';
 type ActionTypes = `update-${ColorFormats}`; // ActionTypes: 'update-hex' | 'update-rgb'
+
+const isHexColor = (str: string): str is HexColor => {
+  return str.startsWith('#');
+}
 ```
