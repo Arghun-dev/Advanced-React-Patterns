@@ -175,3 +175,33 @@ const isHexColor = (str: string): str is HexColor => {
   return str.startsWith('#');
 }
 ```
+
+---
+
+# Inferring Generic Type
+
+Because I passed `T` generic type to `useStateObject` I will have it type safe.
+
+```js
+import { useState } from 'react';
+
+const useStateObject = <T,>(initialState: T) => {
+    const [state, setState] = useState(initialState);
+
+    return { state, setState };
+}
+
+const Component = () => {
+    const { state, setState } = useStateObject({ name: 'Arghun' });
+
+    // This will work autocomplete
+    state.name
+
+    // Will give me error
+    setState('asdsad');
+
+    // This will work now.
+    setState({ name: 'Sahand' })
+
+}
+```
