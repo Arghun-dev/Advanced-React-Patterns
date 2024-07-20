@@ -283,3 +283,35 @@ const App = () => {
 ```
 
 Now the rows prop is typesafe as well. And the `ProductList` component expects to get products as `row` prop and if you pass other value which wouldn't match product type you will get error.
+
+---
+
+# Conditional Prop Types
+
+```js
+type PopupProps = {
+    isOpen: boolean;
+} & (
+    {
+        variant: "with-control",
+        label: string;
+        onClick: () => void;
+    } |
+    {
+        variant: "without-control"
+    }
+)
+
+const Popup = (props: PopupProps) => {
+    return <></>
+}
+
+const App = () => {
+    return (
+        <>
+            <Popup isOpen={false} variant="without-control" />
+            <Popup isOpen={true} variant="with-control" label="Test" onClick={() => console.log('test')} />
+        </>
+    )
+}
+```
