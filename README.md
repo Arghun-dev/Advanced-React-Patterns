@@ -244,3 +244,42 @@ const App = () => {
     return <ProductList rows={products} renderRow={(row) => <div>{row.title}</div>} />
 }
 ```
+
+One more practice that you can make the `rows` prop type safe as well is like this you can pass type to component.
+
+```js
+interface ProductListProps<T> {
+    rows: T[];
+    renderRow: (row: T) => React.ReactElement;
+}
+
+const ProductList = <T,>({ rows, renderRow }: ProductListProps<T>) => {
+    return rows.map((row) => renderRow(row));
+}
+
+interface Product {
+    id: number;
+    title: string;
+    description: string;
+}
+
+const products: Product[] = [
+    {
+        id: 1,
+        title: 'First product',
+        description: 'Product description'
+    },
+    {
+        id: 2,
+        title: 'Second product',
+        description: 'Second Product description'
+    },
+]
+
+const App = () => {
+    // Now the ProductList component is generic type safe component and now if I type here row. => I will have autocomplete for the row
+    return <ProductList<Product> rows={products} renderRow={(row) => <div>{row.title}</div>} />
+}
+```
+
+Now the rows prop is typesafe as well. And the `ProductList` component expects to get products as `row` prop and if you pass other value which wouldn't match product type you will get error.
