@@ -315,3 +315,38 @@ const App = () => {
     )
 }
 ```
+
+---
+
+# Requiring props
+
+```js
+import React from 'react';
+
+type AlertProps = {
+    btnColor: string
+} & (
+    {
+        variant: "without-code"
+    } |
+    {
+        variant: "with-code",
+        code: number
+    }
+)
+
+const Alert = (props: AlertProps) => {
+    return (
+        <div>Hey</div>
+    )
+}
+
+const App = () => {
+    return (
+        <>
+            <Alert variant='with-code' btnColor='green' code={40} />
+            <Alert variant='without-code' btnColor='green' />
+        </>
+    )
+}
+```
