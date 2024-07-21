@@ -417,3 +417,10 @@ const App = () => {
     )
 }
 ```
+
+---
+
+# Linking types
+
+<img width="1012" alt="Screenshot 2024-07-21 at 18 54 21" src="https://github.com/user-attachments/assets/375ab55e-395a-4fe9-8cb6-decb3fd8b248">
+
