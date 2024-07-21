@@ -428,6 +428,8 @@ const App = () => {
 
 # Extracting types with a const
 
+making an object as const, make your object readonly and you can not change the values of the object.
+
 ```js
 const button_types = {
     0: "warning",
