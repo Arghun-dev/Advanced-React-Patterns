@@ -382,3 +382,38 @@ const App = () => {
     )
 }
 ```
+
+---
+
+# Or pass one of them or non of them
+
+```js
+import React, { ChangeEventHandler }  from 'react';
+
+type InputProps = {
+    label: string,
+} & (
+    {
+        value?: undefined,
+        onChange?: undefined,
+    } |
+    {
+        value: string,
+        onChange: ChangeEventHandler,
+    }
+)
+
+const Input = (props: InputProps) => {
+    return <div></div>
+}
+
+
+const App = () => {
+    return (
+        <>
+            <Input label='label' value='test' onChange={(e) => console.log(e)} />
+            <Input label='label' />
+        </>
+    )
+}
+```
