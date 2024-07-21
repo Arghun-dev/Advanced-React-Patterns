@@ -350,3 +350,35 @@ const App = () => {
     )
 }
 ```
+
+---
+
+# Differentiating props
+
+```js
+import React from 'react';
+
+type ProfileProps = 
+    | {
+        showLinkedIn: true,
+        linkedin: string
+    }
+    | {
+        showLinkedIn?: false,
+        githubId: string
+    }
+
+const Profile = (props: ProfileProps) => {
+    return <div></div>
+}
+
+
+const App = () => {
+    return (
+        <>
+            <Profile showLinkedIn linkedin='linkedin-id' />
+            <Profile showLinkedIn={false} githubId='github-id' />
+        </>
+    )
+}
+```
