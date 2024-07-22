@@ -449,6 +449,8 @@ The component always re-renders because of state updates and if a component stat
 
 An element or a component is basically an object that outlines a component to be displayed.
 
+The `object` of Child element returned from parent component
+
 ```js
 const Parent = () => {
   return <Child />
@@ -461,11 +463,24 @@ const Parent = () => {
 }
 
 
-// Child
+// Parent
 
 {
  type: Child,
- props: {}
+ props: {} // because parent is not passing any props to Child component
  ... othet react stuff
+}
+
+
+const Child = () => {
+    return <h2>I am child</h2>
+}
+
+// The object of h2 element is returned from Child component
+
+{
+ type: "h2",
+ props: {},
+ ... a bunch of other react stuff
 }
 ```
