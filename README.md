@@ -484,3 +484,5 @@ const Child = () => {
  ... a bunch of other react stuff
 }
 ```
+
+on time of re-rendering react constructs two trees `Virtual DOM before`, `Virtual DOM after (with updated elements)` and then compare these two trees and only `re-renders` updated elements in real DOM. This act of comparision is called `Diffing` and this whole process of re-rendering called `Re-conciliation`.
