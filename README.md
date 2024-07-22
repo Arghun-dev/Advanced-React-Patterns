@@ -495,3 +495,59 @@ const Parent = () => {
  // Think of returned <Child /> componenent as an object that is defined locally in the Parent component, so on every re-render of Parent, it (Child component) will be `re-defined` and if an object gets re-defined it's actually a `new object` consequently React does `diffing` and sees that it's actually a new object So it `re-renders` the Child component.
 }
 ```
+
+
+### Example of optimizing component structuring to prevent wasted re-renders
+
+In this example I will first show you the bad implementation which has wasted re-renders and then I will show you the corrected version of it.
+
+**BAD CODE**
+```js
+const Parent = () => {
+  const [state, setState] = useState()
+
+  const handleScroll = () => {
+    setState(...)
+  }
+  
+  return (
+    <Scrollbar onScroll={handleScroll}>
+        <SlowComponent />
+        <BlahBlah />
+        <AnotherComponent />
+    </Scrollbar>
+  )
+}
+```
+
+in the above implementation above when `handleScroll` function gets called setState triggers in the parent component and it causes re-render of the parent component and consequently all `child` components also gets `re-rendered`. So, it's a mess.
+
+
+**GOOD CODE**
+```js
+const ScrollbarContainer = ({ children }) => {
+  const [state, setState] = useState();
+
+  const handleScroll = () => {
+   setScroll(...)
+  };
+
+  return (
+    <Scrollbar onScroll={handleScroll}>
+      {children}
+    </Scrollbar>
+  )
+}
+
+const Parent = () => {
+ return (
+   <ScrollbarContainer>
+        <SlowComponent />
+        <BlahBlah />
+        <AnotherComponent />
+    </ScrollbarContainer>
+ )
+}
+```
+
+Now with the above implementation as you can see I capsulated the state to `ScrollbarContainer` component and when `handleScroll` gets called only `ScrollbarContainet` component get's re-render the other components which have been passed as children prop to `ScrollbarContainer` component does not get re-renders. So, that's an awesome trick right :)
