@@ -448,4 +448,24 @@ type ButtonValues = typeof button_types[ButtonKeys]
 The component always re-renders because of state updates and if a component state updates the component itself and all the child components that have been defined in that component will be `re-rendered` and the re-rendering of child components is not related to props changes in Child component so don't confuse it. So, the component and child components are only re-rendered because of `state` updates in parent component.
 
 An element or a component is basically an object that outlines a component to be displayed.
-<img width="617" alt="Screenshot 2024-07-22 at 12 03 06" src="https://github.com/user-attachments/assets/fd1d28f2-57cd-4017-b39c-867c050f6b6d">
+
+```js
+const Parent = () => {
+  return <Child />
+}
+
+// ~
+
+const Parent = () => {
+  return React.createElement(Child, null, null);
+}
+
+
+// Child
+
+{
+ type: Child,
+ props: {}
+ ... othet react stuff
+}
+```
