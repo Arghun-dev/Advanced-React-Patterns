@@ -486,3 +486,12 @@ const Child = () => {
 ```
 
 on time of re-rendering react constructs two trees `Virtual DOM before`, `Virtual DOM after (with updated elements)` and then compare these two trees and only `re-renders` updated elements in real DOM. This act of comparision is called `Diffing` and this whole process of re-rendering called `Re-conciliation`.
+
+```js
+const Parent = () => {
+ const [state, setState] = useState();
+
+ // somewhere here the setState is called, and it triggers a re-render of the Parent component
+ // Think of returned <Child /> componenent as an object that is defined locally in the Parent component, so on every re-render of Parent, it (Child component) will be `re-defined` and if an object gets re-defined it's actually a `new object` consequently React does `diffing` and sees that it's actually a new object So it `re-renders` the Child component.
+}
+```
