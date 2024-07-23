@@ -608,3 +608,48 @@ const MainComponent = (props) => {
    This might seem opposing to the common practice of isolating stateful logic in custom hooks, which is why we have custom hooks in the first place. While custom hooks seriously simplify complexities, they also obsecure whether they return data or function have stable inferences.
    Like the exable above, the `submit` funcion is concealed within the `useSubmitForm` custom hook.
    Every custom hook triggers on every re-render, so it can cause disrupt in memoization of the `MemoizedComponent` so you have to wrap the functions with `useCallback` or `useMemo` depending use case when creating those functions in custom hook.
+
+
+Look at the code below and it look correct right?
+
+```js
+const MemoizedChild = React.memo(Child);
+
+const MyComponent = () => {
+  return (
+    <MemoizedChild>
+        <div>Hello world!</div>
+    </MemoizedChild>
+  )
+}
+```
+
+However, the memoization here is actually broken, making this react memo wrapper really pointless.
+
+We can re-write above code just like below:
+
+```js
+const MemoizedChild = React.memo(Child);
+
+const MyComponent = () => {
+    return <MemoizedChild children={<div>Hello world!</div>} />
+}
+```
+
+As we explored in the previous syntax all JSX code translates to `react.createElement` function, which in turn just create an object in this scenario it results an object with the type of "div" => { type: "div" }
+
+So in the above code we're actually passing `unmemoized` type div object to MemoizedChild component.
+
+To resolve this we also need to make sure that the div also memoized.
+
+```js
+const MyComponent = () => {
+    const children = useMemo(() => {
+        return <div>Hello world!</div>
+    }, []);
+
+    return (
+        <MemoizedChild>{children}</MemoizedChild>
+    )
+}
+```
