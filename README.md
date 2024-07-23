@@ -551,3 +551,60 @@ const Parent = () => {
 ```
 
 Now with the above implementation as you can see I capsulated the state to `ScrollbarContainer` component and when `handleScroll` gets called only `ScrollbarContainet` component get's re-render the other components which have been passed as children prop to `ScrollbarContainer` component does not get re-renders. So, that's an awesome trick right :)
+
+---
+
+# React.memo and prop drilling
+
+The most straitforward case of broken memoization is about props that are being passed through multiple components, particularly when props are spread across many intermediary components, something that we know as prop drilling.
+
+So consider a scenario with a sequence of components like this one below, it's highly unlikely that anyone adding additional data to inner components will inspect each component in the chain, As a result the inner component disrupt the memoization of the memoized inner component by passing it a prop that hasn't been memoized. So, unless you can guarantee that every prop every where is memoized using react.memo on components must be done with careful adherenece to specific guidelines and rules that I will mention here.
+
+```js
+const InnerComponent = () => {};
+const MemoizedInnerComponent = () => React.memo(InnerComponent);
+
+const IntermediateComponent = (props) => {
+    return <MemoizedInnerComponent {...props} />
+}
+
+const WrapperComponent = (props) => {
+    return <IntermediateComponent {...props} />
+}
+
+const MainComponent = (props) => {
+    // This component will have state and will trigger re-render of this component
+    return <WrapperComponent {...props} data={{ id: '1' }} />
+}
+```
+
+### Rules
+
+1. You should never spread props received from other components like in this example.
+
+   ```js
+   // BAD CODE
+   const Component = (props) => {
+     return <MemoizedComponent {...props} />;
+   }
+
+   // GOOD CODE
+   const Component = (props) => {
+     return <MemoizedComponent data={props.data} blahblah={props.blahblah} />  
+   }
+   ```
+
+2. Avoid passing `non-primitive` props derived from other components
+   If any of those props are `non-memoized` objects or functions, memoization will be broken again.
+
+3. Be cautious about passing `non-primitive` values that come from `custom-hooks` 
+   ```js
+   const Component = () => {
+        const { submit } = useSubmitForm();
+
+        return <MemoizedComponent onChange={submit} />
+   }
+   ```
+   This might seem opposing to the common practice of isolating stateful logic in custom hooks, which is why we have custom hooks in the first place. While custom hooks seriously simplify complexities, they also obsecure whether they return data or function have stable inferences.
+   Like the exable above, the `submit` funcion is concealed within the `useSubmitForm` custom hook.
+   Every custom hook triggers on every re-render, so it can cause disrupt in memoization of the `MemoizedComponent` so you have to wrap the functions with `useCallback` or `useMemo` depending use case when creating those functions in custom hook.
