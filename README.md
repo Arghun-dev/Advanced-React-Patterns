@@ -653,3 +653,118 @@ const MyComponent = () => {
     )
 }
 ```
+
+
+---
+
+
+## React Hooks and State Isolation (Important)
+
+The reason the state does not change when using the useCounter hook in separate components is due to the nature of React hooks and state management. Each call to useCounter creates a new, isolated state instance. This means that each component using the useCounter hook maintains its own separate state, and changes in one component do not affect the state in another component.
+
+Here's a detailed explanation:
+
+React Hooks and State Isolation
+When you define a custom hook like `useCounter`, it uses React's useState internally. Each time you call useCounter, a new `state instance` is created. This is how React hooks are designed to work, ensuring that each component has its own isolated state.
+
+Example Scenario
+Consider the following simplified example:
+
+
+```js
+import React from 'react';
+import { useCounter } from './useCounter';
+
+const IncrementButton = () => {
+  const { increment } = useCounter();
+  return <button onClick={increment}>Increment</button>;
+};
+
+const CountDisplay = () => {
+  const { count } = useCounter();
+  return <p>Count: {count}</p>;
+};
+
+const CounterComponent = () => {
+  return (
+    <div>
+      <CountDisplay />
+      <IncrementButton />
+    </div>
+  );
+};
+
+export default CounterComponent;
+```
+
+In this example:
+
+`IncrementButton` calls useCounter and gets its own state instance.
+`CountDisplay` calls useCounter and gets a different state instance.
+
+When you click the increment button, it updates the state in IncrementButton, but CountDisplay is not aware of this change because it has its own separate state.
+
+
+Why State Does Not Change Across Components
+
+1. `Isolated State Instances`: Each call to useCounter creates a new state instance. Therefore, IncrementButton and CountDisplay do not share the same state.
+2. `No Shared State`: Since the state is not shared, updating the state in one component does not affect the state in another component.
+
+
+**Solution: Shared State**
+
+To share state across components, you need to lift the state up to a common parent component or use a global state management solution like `React Context`, `Zustand`, or `Redux`.
+
+Like using React context:
+
+```js
+import React, { createContext, useContext, useCallback, useState } from 'react';
+
+const CounterContext = createContext(null);
+
+export const CounterProvider = ({ children }) => {
+  const [count, setCount] = useState(0);
+
+  const increment = useCallback(() => setCount(prevCount => prevCount + 1), []);
+  const decrement = useCallback(() => setCount(prevCount => prevCount - 1), []);
+  const reset = useCallback(() => setCount(0), []);
+
+  return (
+    <CounterContext.Provider value={{ count, increment, decrement, reset }}>
+      {children}
+    </CounterContext.Provider>
+  );
+};
+
+export const useCounter = () => {
+  const context = useContext(CounterContext);
+  if (!context) {
+    throw new Error('useCounter must be used within a CounterProvider');
+  }
+  return context;
+};
+```
+
+```js
+import React from 'react';
+import { CounterProvider } from './CounterContext';
+import IncrementButton from './IncrementButton';
+import DecrementButton from './DecrementButton';
+import CountDisplay from './CountDisplay';
+import ResetButton from './ResetButton';
+
+const CounterComponent = () => {
+  return (
+    <CounterProvider>
+      <div>
+        <CountDisplay />
+        <IncrementButton />
+        <DecrementButton />
+        <ResetButton />
+      </div>
+    </CounterProvider>
+  );
+};
+
+export default CounterComponent;
+```
