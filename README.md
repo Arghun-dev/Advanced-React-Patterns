@@ -861,3 +861,13 @@ All you do is telling react that hey, I have a state and I have a new value for 
 but if you use `useRef` instead of useState the logs output would be `before - `, `after - a`
 
 because `useRef` is `synchronous`
+
+
+### Question: When should we use ref over state and vice versa for storing a value between re-renders?
+
+There are couple of questions you should ask about the value.
+
+1. First question is that value going to be used to render a component?
+2. Second question is that is going to be pass as a prop to a component?
+
+If the answers to both questions is `negative`, then you can go with `ref`.
