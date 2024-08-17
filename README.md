@@ -871,3 +871,66 @@ There are couple of questions you should ask about the value.
 2. Second question is that is going to be pass as a prop to a component?
 
 If the answers to both questions is `negative`, then you can go with `ref`.
+
+
+---
+
+
+## Closure in React
+
+let's look at the below component for memoizing Expensive component I'm using React.memo with using the second parameter of React.memo to tell hey only re-render the child component if `btnLabel` prop is changed.
+
+```js
+// Why I have used the second parameter of memo, because ExpensiveComponent receives two props btnLabel and clickHandler, and I want to specifically tell Child component if only btnLabel is changed re-render the component regardless of clickHandler, event if clickHandler changed don't re-render the ExpensiveComponent.
+ 
+const MemoizedEx = memo(ExpensiveComponent, (before, after) => {
+  return before.btnLabel === after.btnLabel; // if this returns true it will not re-render the component
+}).
+
+const App = () => {
+  const [value, setValue] = useState('');
+
+  const clickHandler = () => {
+    console.log(value);
+  }
+
+  return (
+    <>
+        <input value={value} onChange={(e) => setValue(e.target.value)} />
+        <ExpensiveComponent btnLabel='click me' clickHandler={clickHandler} />
+    </>
+  )
+}
+```
+
+We have solved extra re-rendering of child component and we should be happy right?
+
+NOOOOOOOOOOOOOOOOOOOOOO
+
+if you now run clickHandler function we should see the value logged that user has type right? but with the above approach now if you run clickHandler function you will get `undefined` in the log.
+
+What's going on really? That's because `Closures` :)
+
+so instead of above approach you should wrap the clickHandler function with `useCallback`
+
+```js
+
+// Why I have used the second parameter of memo, because ExpensiveComponent receives two props btnLabel and clickHandler, and I want to specifically tell Child component if only btnLabel is changed re-render the component regardless of clickHandler, event if clickHandler changed don't re-render the ExpensiveComponent.
+ 
+const MemoizedEx = memo(ExpensiveComponent).
+
+const App = () => {
+  const [value, setValue] = useState('');
+
+  const clickHandler = useCallback(() => {
+    console.log(value);
+  }, [value]);
+
+  return (
+    <>
+        <input value={value} onChange={(e) => setValue(e.target.value)} />
+        <ExpensiveComponent btnLabel='click me' clickHandler={clickHandler} />
+    </>
+  )
+}
+```
