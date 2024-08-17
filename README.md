@@ -826,6 +826,10 @@ Once we have created a ref, we can assign anything to it, whether in useEffect o
 2. State update async but ref update synchronously
 
 
+### React setState async behaviour
+
+It's not the same async that we know, it's not returning Promise but it's behaviour is like an async action.
+
 How `setState` is async. Look at the below example:
 
 ```js
