@@ -819,3 +819,36 @@ const Component = () => {
 ```
 
 Once we have created a ref, we can assign anything to it, whether in useEffect or within just event handlers, it's simply an object nothing more complicated than this.
+
+**Important Notes**
+
+1. Ref update does not trigger re-render but state update triggers re-render on the component
+2. State update async but ref update synchronously
+
+
+How `setState` is async. Look at the below example:
+
+```js
+const Form = () => {
+  const [value, setValue] = useState('');
+
+  const handleChange = (e) => {
+    console.log('before - ', value);
+    setValue(e.target.value);
+    console.log('after - ', value);
+  };
+}
+```
+
+In the above component if we type for example 'a', the log that will be shown will be:
+
+```js
+before -
+after -
+```
+
+both of them are empty - why? what happens here?
+
+we you are saying `setValue` you are not updating an object directly.
+
+All you do is telling react that hey, I have a state and I have a new value for that state. I want to schedule a new task for updating the state with a new value, that's it goodbye :) And goes to the next line. That's why you see the `after - ` empty string. the value of the state is the same, it's not changing immediately because setValue or setState generally is `asynchronous`. It's not the same async that we know, but technically you can think of it as an async task.
