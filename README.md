@@ -914,9 +914,6 @@ What's going on really? That's because `Closures` :)
 so instead of above approach you should wrap the clickHandler function with `useCallback`
 
 ```js
-
-// Why I have used the second parameter of memo, because ExpensiveComponent receives two props btnLabel and clickHandler, and I want to specifically tell Child component if only btnLabel is changed re-render the component regardless of clickHandler, event if clickHandler changed don't re-render the ExpensiveComponent.
- 
 const MemoizedEx = memo(ExpensiveComponent).
 
 const App = () => {
