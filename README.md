@@ -856,3 +856,8 @@ both of them are empty - why? what happens here?
 we you are saying `setValue` you are not updating an object directly.
 
 All you do is telling react that hey, I have a state and I have a new value for that state. I want to schedule a new task for updating the state with a new value, that's it goodbye :) And goes to the next line. That's why you see the `after - ` empty string. the value of the state is the same, it's not changing immediately because setValue or setState generally is `asynchronous`. It's not the same async that we know, but technically you can think of it as an async task.
+
+
+but if you use `useRef` instead of useState the logs output would be `before - `, `after - a`
+
+because `useRef` is `synchronous`
