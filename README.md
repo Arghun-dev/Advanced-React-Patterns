@@ -768,3 +768,54 @@ const CounterComponent = () => {
 
 export default CounterComponent;
 ```
+
+---
+
+
+### Refs
+
+// without React
+
+```js
+const el = document.getElementById('username-input');
+el.focus();
+```
+
+// typical use-cases for using Refs in React:
+
+1. Focusing an element
+2. Detecting outside clicks
+3. Scrolling to an element
+4. Estimating boundaries of elements
+
+What is Ref in React?
+
+Well a ref in react is just a `mutable object that is maintained across re-renders`.
+
+Do you remember how everything within a component is recreated every time? Components are essentially functions and `everything inside them is treated like a local variable and every time component re-renders these local variables is being re-created again.
+
+```js
+const Component = () => {
+  // will be new with every re-render
+  const data = { id: 'test' };
+}
+```
+
+Refs helps us bypass this behaviour,
+
+to use ref we use `useRef` hook and we provide it with initial value, this initial value is accessible through `ref.current` however whatever we assign to the ref is stored there. The initial value is retained, so comparing ref.current across re-renders will show that reference remains constant, much like using the useMemo hook on that object.
+
+```js
+const Component = () => {
+  const someData = ...
+
+  const ref = useRef({ id: 'test' });  // initial value
+
+  useEffect(() => {
+    // assign some value as an id, when it changes
+    ref.current = { id: someData };
+  }, [someData]) 
+}
+```
+
+Once we have created a ref, we can assign anything to it, whether in useEffect or within just event handlers, it's simply an object nothing more complicated than this.
